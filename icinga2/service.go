@@ -6,13 +6,16 @@ import (
 )
 
 type Service struct {
-	Name         string `json:"display_name"`
-	HostName     string `json:"host_name"`
-	CheckCommand string `json:"check_command"`
-	Notes        string `json:"notes"`
-	NotesURL     string `json:"notes_url"`
-	Vars         Vars   `json:"vars"`
-	Zone         string `json:"zone,omitempty"`
+	Name            string   `json:"name"`
+	CommandEndpoint string   `json:"command_endpoint,omitempty"`
+	DisplayName     string   `json:"display_name"`
+	HostName        string   `json:"host_name"`
+	CheckCommand    string   `json:"check_command"`
+	Notes           string   `json:"notes"`
+	NotesURL        string   `json:"notes_url"`
+	Vars            Vars     `json:"vars"`
+	Zone            string   `json:"zone,omitempty"`
+	Groups          []string `json:"groups,omitempty"`
 }
 
 type ServiceResults struct {
@@ -90,43 +93,4 @@ func (s *WebClient) UpdateService(service Service) error {
 
 	err := s.UpdateObject("/services/"+service.FullName(), serviceUpdate)
 	return err
-}
-
-func (s *MockClient) GetService(name string) (Service, error) {
-	if sv, ok := s.Services[name]; ok {
-		return sv, nil
-	} else {
-		return Service{}, fmt.Errorf("service not found")
-	}
-}
-
-func (s *MockClient) CreateService(service Service) error {
-	s.mutex.Lock()
-	s.Services[service.FullName()] = service
-	s.mutex.Unlock()
-	return nil
-}
-
-func (s *MockClient) ListServices() ([]Service, error) {
-	services := []Service{}
-
-	for _, x := range s.Services {
-		services = append(services, x)
-	}
-
-	return services, nil
-}
-
-func (s *MockClient) DeleteService(name string) error {
-	s.mutex.Lock()
-	delete(s.Services, name)
-	s.mutex.Unlock()
-	return nil
-}
-
-func (s *MockClient) UpdateService(service Service) error {
-	s.mutex.Lock()
-	s.Services[service.FullName()] = service
-	s.mutex.Unlock()
-	return nil
 }

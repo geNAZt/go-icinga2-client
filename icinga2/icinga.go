@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"sync"
 )
 
 type Client interface {
@@ -28,6 +27,12 @@ type Client interface {
 	ListServices() ([]Service, error)
 	DeleteService(string) error
 	UpdateService(Service) error
+
+	GetServiceGroup(string) (ServiceGroup, error)
+	CreateServiceGroup(ServiceGroup) error
+	ListServiceGroups() ([]ServiceGroup, error)
+	DeleteServiceGroup(string) error
+	UpdateServiceGroup(ServiceGroup) error
 }
 
 type WebClient struct {
@@ -38,13 +43,6 @@ type WebClient struct {
 	Debug       bool
 	InsecureTLS bool
 	Zone        string
-}
-
-type MockClient struct {
-	Hostgroups map[string]HostGroup
-	Hosts      map[string]Host
-	Services   map[string]Service
-	mutex      sync.Mutex
 }
 
 type Vars map[string]interface{}
@@ -75,15 +73,6 @@ func New(s WebClient) (*WebClient, error) {
 	s.URL = strings.TrimRight(s.URL, "/")
 
 	return &s, nil
-}
-
-func NewMockClient() (c *MockClient) {
-	c = new(MockClient)
-	c.Hostgroups = make(map[string]HostGroup)
-	c.Hosts = make(map[string]Host)
-	c.Services = make(map[string]Service)
-	c.mutex = sync.Mutex{}
-	return
 }
 
 type Results struct {
