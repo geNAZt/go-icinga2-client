@@ -6,7 +6,6 @@ import (
 )
 
 type ServiceGroup struct {
-	Name        string `json:"name"`
 	DisplayName string `json:"display_name"`
 	Package     string `json:"package"`
 	Notes       string `json:"notes"`

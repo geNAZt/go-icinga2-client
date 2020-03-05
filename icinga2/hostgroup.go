@@ -5,9 +5,9 @@ import (
 )
 
 type HostGroup struct {
-	Name string `json:"display_name,omitempty"`
-	Vars Vars   `json:"vars"`
-	Zone string `json:"zone,omitempty"`
+	DisplayName string `json:"display_name,omitempty"`
+	Vars        Vars   `json:"vars"`
+	Zone        string `json:"zone,omitempty"`
 }
 
 type HostGroupResults struct {

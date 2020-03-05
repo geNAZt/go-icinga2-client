@@ -6,7 +6,7 @@ import (
 )
 
 type Host struct {
-	Name         string   `json:"display_name"`
+	DisplayName  string   `json:"display_name"`
 	Address      string   `json:"address,omitempty"`
 	Address6     string   `json:"address6,omitempty"`
 	CheckCommand string   `json:"check_command,omitempty"`

@@ -6,7 +6,6 @@ import (
 )
 
 type Service struct {
-	Name            string   `json:"name"`
 	CommandEndpoint string   `json:"command_endpoint,omitempty"`
 	DisplayName     string   `json:"display_name"`
 	HostName        string   `json:"host_name"`
