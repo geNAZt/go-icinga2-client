@@ -15,7 +15,7 @@ type ServiceGroup struct {
 }
 
 func (group *ServiceGroup) FullName() string {
-	return group.Name
+	return group.DisplayName
 }
 
 type ServiceGroupResults struct {

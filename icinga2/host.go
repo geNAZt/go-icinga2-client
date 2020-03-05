@@ -58,7 +58,7 @@ func (s *WebClient) GetHost(name string) (Host, error) {
 
 func (s *WebClient) CreateHost(host Host) error {
 	hostCreate := HostCreate{Templates: []string{"generic-host"}, Attrs: host}
-	err := s.CreateObject("/hosts/"+host.Name, hostCreate)
+	err := s.CreateObject("/hosts/"+host.DisplayName, hostCreate)
 	return err
 }
 
@@ -87,6 +87,6 @@ func (s *WebClient) DeleteHost(name string) (err error) {
 func (s *WebClient) UpdateHost(host Host) error {
 	host.Groups = []string{} // must be empty when updating the Host
 	hostUpdate := HostCreate{Attrs: host}
-	err := s.UpdateObject("/hosts/"+host.Name, hostUpdate)
+	err := s.UpdateObject("/hosts/"+host.DisplayName, hostUpdate)
 	return err
 }

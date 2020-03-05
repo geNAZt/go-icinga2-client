@@ -39,7 +39,7 @@ func (s *WebClient) GetHostGroup(name string) (HostGroup, error) {
 
 func (s *WebClient) CreateHostGroup(hostGroup HostGroup) error {
 	hostGroupCreate := HostGroupCreate{Attrs: hostGroup}
-	err := s.CreateObject("/hostgroups/"+hostGroup.Name, hostGroupCreate)
+	err := s.CreateObject("/hostgroups/"+hostGroup.DisplayName, hostGroupCreate)
 	return err
 }
 
@@ -68,6 +68,6 @@ func (s *WebClient) DeleteHostGroup(name string) (err error) {
 func (s *WebClient) UpdateHostGroup(hostGroup HostGroup) error {
 	hostGroupUpdate := HostGroupCreate{Attrs: hostGroup}
 
-	err := s.UpdateObject("/hostgroups/"+hostGroup.Name, hostGroupUpdate)
+	err := s.UpdateObject("/hostgroups/"+hostGroup.DisplayName, hostGroupUpdate)
 	return err
 }

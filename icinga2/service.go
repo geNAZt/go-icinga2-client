@@ -44,7 +44,7 @@ func (s Service) GetNotesURL() string {
 }
 
 func (s *Service) FullName() string {
-	return s.HostName + "!" + s.Name
+	return s.HostName + "!" + s.DisplayName
 }
 
 func (s *WebClient) GetService(name string) (Service, error) {
